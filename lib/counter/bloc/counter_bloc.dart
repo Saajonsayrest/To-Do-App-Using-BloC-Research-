@@ -28,4 +28,6 @@ class CounterBloc extends HydratedBloc<CounterEvent, CounterState> {
   Map<String, dynamic>? toJson(CounterState state) {
     return state.toMap();
   }
+
+
 }
