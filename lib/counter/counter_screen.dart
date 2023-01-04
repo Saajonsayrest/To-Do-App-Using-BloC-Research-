@@ -33,6 +33,7 @@ class CounterScreen extends StatelessWidget {
             );
           }, listener: (context, state) {
             if (state is IncrementState) {
+
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text('Successfully Incremented'),
                 duration: Duration(seconds: 1),
