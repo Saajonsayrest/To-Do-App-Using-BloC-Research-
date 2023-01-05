@@ -37,7 +37,7 @@ class Task extends Equatable {
     String? title,
     String? id,
     bool? isDone,
-    bool? isDedleted,
+    bool? isDeleted,
   }) {
     return Task(
       title: title ?? this.title,

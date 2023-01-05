@@ -8,6 +8,7 @@ class AddTaskScreen extends StatefulWidget {
    const AddTaskScreen({
     Key? key,
   }) : super(key: key);
+   static const id = "add_task_screen";
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();

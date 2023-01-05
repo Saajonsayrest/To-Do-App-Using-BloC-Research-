@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:todo_app_bloc/widgets/add_task_screen.dart';
+import 'package:todo_app_bloc/screens/my_drawer.dart';
+import 'package:todo_app_bloc/screens/add_task_screen.dart';
 import 'package:todo_app_bloc/widgets/tasks_list.dart';
 
 import '../../bloc/bloc_exports.dart';
@@ -8,6 +9,7 @@ import '../../models/task.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
+  static const id = "tasks_screen";
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
@@ -28,15 +30,6 @@ class _TaskScreenState extends State<TaskScreen> {
         });
   }
 
-  @override
-  void initState()  {
-    storage();
-    super.initState();
-  }
-
-  void storage() async {
-    await StoragePermissionClass().storagePermission(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +39,7 @@ class _TaskScreenState extends State<TaskScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const Center(child: Text('Tasks App')),
+
             actions: [
               IconButton(
                   onPressed: () {
@@ -54,10 +48,11 @@ class _TaskScreenState extends State<TaskScreen> {
                   icon: const Icon(Icons.add))
             ],
           ),
+          drawer: MyDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Chip(label: Text('Tasks:')),
+               Chip(label: Text('Tasks: ${state.allTasks.length}')),
               TasksList(tasksList: tasksList)
             ],
           ),
@@ -74,28 +69,3 @@ class _TaskScreenState extends State<TaskScreen> {
   }
 }
 
-
-class StoragePermissionClass {
-  Future<bool> storagePermission(BuildContext context) async {
-    await Permission.storage.request();
-    var storageStatus = await Permission.storage.status;
-    if (storageStatus != PermissionStatus.granted) {
-      await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                openAppSettings();
-              },
-              child: Text("Open App Settings"),
-            ),
-          ],
-        ),
-      );
-      return false;
-    } else {
-      return true;
-    }
-  }
-}

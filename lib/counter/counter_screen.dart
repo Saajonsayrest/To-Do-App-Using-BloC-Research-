@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app_bloc/counter/bloc/brightness_cubit.dart';
-import 'package:todo_app_bloc/counter/screens/new_screen_test.dart';
 
+import 'new_screen_test.dart';
 import 'bloc/bloc_imports.dart';
 
 class CounterScreen extends StatelessWidget {
